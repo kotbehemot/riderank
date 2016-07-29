@@ -1,9 +1,7 @@
 class TaxiRidesController < ApplicationController
 
-  respond_to :html
-
   def index
-    get_rides
+    get_ride_stats
     @new_ride = TaxiRide.new :ride_date => Time.now
   end
 
@@ -14,7 +12,7 @@ class TaxiRidesController < ApplicationController
       flash[:notice] = "Your ride was registered successfully"
       redirect_to taxi_rides_path
     else
-      get_rides
+      get_ride_stats
       flash.now[:error] = "Your ride couldn't be added. Check below for errors."
       render :index
     end
@@ -28,14 +26,12 @@ class TaxiRidesController < ApplicationController
 
   private
 
-  def get_rides
+  def get_ride_stats
     @all_rides = TaxiRide.order(:ride_date)
     @day_ride_stats = TaxiRideDailyStat.from_current_month.order(:ride_date).map {|stat| TaxiRideDailyStatsPresenter.new(stat)}
 
     @weekly_stats = TaxiRideWeeklyStat.from_current_week.take(1).first
     @weekly_stats_presenter = TaxiRideWeeklyStatsPresenter.new(@weekly_stats)
-
-
   end
 
   def permitted_params
