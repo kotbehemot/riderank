@@ -1,0 +1,28 @@
+#container
+  width: 80%
+  margin: 4em auto
+  form#new_taxi_ride
+    .input
+      margin: 0.2em 0
+      select.date
+        width: 20%
+        min-width: 150px
+        display: inline-block
+      input.string, input.decimal, select
+        width: 50%
+        display: inline-block
+      label
+        width: 20%
+        text-align: right
+        padding-right: 20px
+        min-width: 100px
+        display: inline-block
+        &.required
+          abbr
+            display: none
+    input[type=submit]
+      margin-left: 20%
+      display: block
+
+    .button.emergency
+      float: right

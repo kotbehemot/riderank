@@ -2,11 +2,12 @@
 %html{:lang => t('app_language')}
   %head
     = render 'shared/metadata'
-
     = stylesheet_link_tag "application", :media => "all"
     = csrf_meta_tags
   %body
-    = yield
+    #container
+      = render 'shared/flash'
+      = yield
     = javascript_include_tag "application"
     = yield :javascripts
 

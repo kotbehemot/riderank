@@ -1,0 +1,14 @@
+= simple_form_for @new_ride do |f|
+  %fieldset
+    %legend Register a new ride
+    - unless @new_ride.errors[:distance_in_meters].empty?
+      %p.alert.error= "Couldn't calculate distance between given origin and destination. Check that your addresses are Gmaps compatibile."
+    = f.input :ride_date, as: :date, required: true, end_year: Date.today.year, start_year: Date.today.year - 5
+    = f.association :taxi_provider, prompt: false
+    = f.input :origin, required: true
+    = f.input :destination, required: true
+    = f.input :price, as: :decimal, precision: 2, required: true, label: t('rides.form.price')
+
+    = f.button :submit, 'Submit', class: 'button primary'
+
+    = link_to 'Clear all previous rides', destroy_all_taxi_rides_path, method: :delete, data: {confirm: 'Are you sure about that?'}, class: 'button outline emergency'

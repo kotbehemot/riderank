@@ -1,5 +1,9 @@
 en:
-  app_name: "Riderank"
+  app_name: "RideRank"
+  app_name_utf8: 'Ride&#7449;ank'
   head:
     description: "Track your Taxi rides"
     keywords: "taxi, uber, vegemite"
+  rides:
+    form:
+      price: 'Price in EUR'

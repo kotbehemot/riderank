@@ -1,0 +1,45 @@
+%h1= raw t('app_name_utf8')
+
+%h3.muted You've ridden #{@weekly_stats_presenter.distance} and spent #{@weekly_stats_presenter.price} in total this week.
+
+- if @day_ride_stats.size <= 0
+  %p.alert.primary No data to display
+- else
+  %table
+    %thead
+      %tr
+        %th Day
+        %th Rides sum
+        %th Avg. ride
+        %th Avg. price
+        %th Taxis
+    %tbody
+      - @day_ride_stats.each do |day_stats|
+        %tr
+          %td= day_stats.day
+          %td= day_stats.total_distance
+          %td= day_stats.avg_distance
+          %td= day_stats.avg_price
+          %td= day_stats.names
+
+- if @all_rides.count <= 0
+  %p.alert.primary No rides this month
+- else
+  %table
+    %thead
+      %tr
+        %th Date
+        %th From
+        %th To
+        %th Distance
+        %th Price
+    %tbody
+      - @all_rides.each do |ride|
+        %tr
+          %td= ride.ride_date
+          %td= ride.origin
+          %td= ride.destination
+          %td= (ride.distance_in_meters.to_f / 1000).to_i
+          %td= ride.price
+
+= render 'form'
