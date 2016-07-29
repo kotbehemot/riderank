@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151223085530) do
+ActiveRecord::Schema.define(version: 20160729101644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -167,4 +167,23 @@ ActiveRecord::Schema.define(version: 20151223085530) do
     t.index ["name"], name: "index_tags_on_name", unique: true, using: :btree
   end
 
+  create_table "taxi_providers", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "taxi_rides", force: :cascade do |t|
+    t.date     "ride_date"
+    t.integer  "taxi_provider_id",                null: false
+    t.string   "origin",             limit: 1024, null: false
+    t.string   "destination",        limit: 1024, null: false
+    t.integer  "price_in_cents",                  null: false
+    t.integer  "distance_in_meters",              null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.index ["taxi_provider_id"], name: "index_taxi_rides_on_taxi_provider_id", using: :btree
+  end
+
+  add_foreign_key "taxi_rides", "taxi_providers"
 end

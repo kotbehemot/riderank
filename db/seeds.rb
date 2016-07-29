@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+['Uber', 'Sawa', 'MPT'].each do |taxi_name|
+  TaxiProvider.where(name: taxi_name).first_or_create
+end
