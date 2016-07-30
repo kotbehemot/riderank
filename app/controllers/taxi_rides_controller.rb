@@ -7,10 +7,9 @@ class TaxiRidesController < ApplicationController
 
   def create
     @new_ride = TaxiRide.new(permitted_params)
-    @new_ride.distance_in_meters = GoogleIntegrations::GmapsDistanceMatrix.get_distance(@new_ride.origin, @new_ride.destination)
     if @new_ride.save
       flash[:notice] = "Your ride was registered successfully"
-      redirect_to taxi_rides_path
+      redirect_to root_path
     else
       get_ride_stats
       flash.now[:error] = "Your ride couldn't be added. Check below for errors."
@@ -21,7 +20,7 @@ class TaxiRidesController < ApplicationController
   def destroy_all
     TaxiRide.delete_all
     flash[:notice] = "Data cleared"
-    redirect_to taxi_rides_path
+    redirect_to root_path
   end
 
   private

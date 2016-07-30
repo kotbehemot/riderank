@@ -1,9 +1,9 @@
 %h1= raw t('app_name_utf8')
 
-%h3.muted You've ridden #{@weekly_stats_presenter.distance} and spent #{@weekly_stats_presenter.price} in total this week.
+%h2.subheading.muted You've ridden #{@weekly_stats_presenter.distance} and spent #{@weekly_stats_presenter.price} in total this week.
 
 - if @day_ride_stats.size <= 0
-  %p.alert.primary No data to display
+  %p.alert.primary No stats to display
 - else
   %table
     %thead
@@ -22,9 +22,7 @@
           %td= day_stats.avg_price
           %td= day_stats.names
 
-- if @all_rides.count <= 0
-  %p.alert.primary No rides this month
-- else
+- if @all_rides.count > 0
   %table
     %thead
       %tr
