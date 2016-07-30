@@ -1,8 +1,9 @@
 %h1= raw t('app_name_utf8')
 
-%h2.subheading.muted You've ridden #{@weekly_stats_presenter.distance} and spent #{@weekly_stats_presenter.price} in total this week.
+- present @weekly_stats, :taxi_ride do |weekly_stats|
+  %h2.subheading.muted You've ridden #{weekly_stats.distance} and spent #{weekly_stats.total_price} in total this week.
 
-- if @day_ride_stats.size <= 0
+- if @daily_stats.empty?
   %p.alert.primary No stats to display
 - else
   %table
@@ -14,10 +15,10 @@
         %th Avg. price
         %th Taxis
     %tbody
-      - @day_ride_stats.each do |day_stats|
+      - present_each @daily_stats, :taxi_ride do |day_stats|
         %tr
-          %td= day_stats.day
-          %td= day_stats.total_distance
+          %td= day_stats.ride_date
+          %td= day_stats.distance
           %td= day_stats.avg_distance
           %td= day_stats.avg_price
           %td= day_stats.names
@@ -33,12 +34,12 @@
         %th Price
         %th.col-1 &nbsp
     %tbody
-      - @all_rides.each do |ride|
+      - present_each @all_rides do |ride|
         %tr
           %td= ride.ride_date
           %td= ride.origin
           %td= ride.destination
-          %td= (ride.distance_in_meters.to_f / 1000).to_i
+          %td= ride.distance
           %td= ride.price
           %td= link_to 'Remove', taxi_ride_path(ride), method: :delete, class: 'button small outline'
 

@@ -4,9 +4,9 @@ class TaxiRideDailyStat < TaxiRide
 
   STATS_TO_DISPLAY = [
     'ride_date',
-    'SUM(taxi_rides.distance_in_meters) as total_distance',
-    'AVG(taxi_rides.distance_in_meters) as avg_distance',
-    'AVG(taxi_rides.price_in_cents) as avg_price',
+    'SUM(taxi_rides.distance_in_meters) as distance_in_meters',
+    'AVG(taxi_rides.distance_in_meters) as avg_distance_in_meters',
+    'AVG(taxi_rides.price_in_cents) as avg_price_in_cents',
     "string_agg(DISTINCT taxi_providers.name, ', ') as names"
   ]
 
