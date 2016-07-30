@@ -17,6 +17,12 @@ class TaxiRidesController < ApplicationController
     end
   end
 
+  def destroy
+    @taxi_ride = TaxiRide.find(params[:id])
+    @taxi_ride.destroy
+    redirect_to root_path
+  end
+
   def destroy_all
     TaxiRide.delete_all
     flash[:notice] = "Data cleared"

@@ -31,6 +31,7 @@
         %th To
         %th Distance
         %th Price
+        %th.col-1 &nbsp
     %tbody
       - @all_rides.each do |ride|
         %tr
@@ -39,5 +40,6 @@
           %td= ride.destination
           %td= (ride.distance_in_meters.to_f / 1000).to_i
           %td= ride.price
+          %td= link_to 'Remove', taxi_ride_path(ride), method: :delete, class: 'button small outline'
 
 = render 'form'

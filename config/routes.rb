@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources :taxi_rides, :only => [:create, :destroy]
-  delete 'taxi_rides' => 'taxi_rides#destroy_all', :as => :destroy_all_taxi_rides
+  resources :taxi_rides, :only => [:create, :destroy] do
+    delete :destroy_all, :on => :collection
+  end
   root 'taxi_rides#index'
 end
