@@ -32,7 +32,7 @@ class TaxiRidesController < ApplicationController
   private
 
   def get_ride_stats
-    @all_rides = TaxiRide.order(:ride_date)
+    @all_rides = TaxiRide.order(:ride_date).limit(50)
     @day_ride_stats = TaxiRideDailyStat.from_current_month.order(:ride_date).map {|stat| TaxiRideDailyStatsPresenter.new(stat)}
 
     @weekly_stats = TaxiRideWeeklyStat.from_current_week.take(1).first

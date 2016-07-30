@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.3.1'
 
 gem 'rails', '~> 5.0.0'
-gem 'pg', '~> 0.18'
+gem 'pg', '~> 0.18' # notice, this project uses following PostgreSQL specific functions: string_agg
 gem 'puma', '~> 3.0'
 gem 'haml'
 gem 'sass-rails', '~> 5.0'
@@ -13,9 +13,7 @@ gem 'therubyracer', platforms: :ruby
 gem 'responders', '~> 2.0'
 
 gem 'jquery-rails'
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
-#gem 'jbuilder', '~> 2.5'
 
 gem 'simple_form'
 
